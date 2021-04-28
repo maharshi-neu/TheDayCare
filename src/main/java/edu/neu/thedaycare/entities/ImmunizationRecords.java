@@ -33,6 +33,8 @@ public class ImmunizationRecords {
 				+ ", getImmunizationRequirements()=" + getImmunizationRequirements() + ", getWhen()=" + getWhen() + "]";
 	}
 
+	public ImmunizationRecords() {}
+
 	public ImmunizationRecords(Long id, Student student, ImmunizationRequirements immunizationRequirements,
 			LocalDate when) {
 		super();
