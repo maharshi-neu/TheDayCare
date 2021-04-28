@@ -17,5 +17,18 @@ public class MainController {
     public String admin() {
         return "dashboard";
     }
+    
+    @RequestMapping("/testemail")
+    public String testEmail() {
+
+    	String to = "jinandra.m@northeastern.edu";
+    	String from = "The Day Care <notifications@thedaycare.com>";
+    	String subject = "welcome to The Day Care!";
+    	String body = "welcome to The Day Care! \n Hello World";
+    	EmailService es = new EmailService();
+    	es.sendSimpleMessage(to, from, subject, body);
+    	
+    	return "dashboard";
+    }
 
 }
