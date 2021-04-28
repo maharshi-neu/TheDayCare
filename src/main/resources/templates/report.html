@@ -9,35 +9,25 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
   
   <style>
+  .body{
+  background: linear-gradient(to bottom left, #ffffcc 0%, #ff66ff 100%);
+  }
   .navbar{
   background: linear-gradient(to right, #33cccc 0%, #ffccff 100%);
   }
-  .sidebar-sticky{
-   background:linear-gradient(to right, #ffffff 0%, #ffffcc 100%);
-  }
-  .nav.nav-link{
-  color: white;
-  }
-  .nav-link a:hover{
-    color: #00ccff;
-}
+ 
   
  </style>  
  
  
     
     
-    <title>Dashboard</title>
+    <title>Report</title>
     
     <body id="page-top">
     
     <nav class="navbar sticky-top bg-dark flex-md-nowrap p-0">
      <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/dashboard}">SystemAdmin</a>
-      <ul class="navbar-nav px-3">
-       <li class="nav-item text-nowrap">
-        <a class="nav-link" th:href="@{/welcome}" >Sign Out</a>
-       </li>
-      </ul>
     </nav>
     
     <div class="container-fluid">
@@ -51,7 +41,7 @@
           <a class="nav-link" th:href="@{/dashboard}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           Dashboard
-          <span class="sr-only">(current)</span>
+          
           </a>
           </li>
         </ul>
@@ -79,6 +69,7 @@
          <a class="nav-link" th:href="@{/classroom}">
          <i class="fas fa-chair"></i>
          Classroom
+         
          </a>
         </li>
         </ul>
@@ -92,6 +83,7 @@
          <a class="nav-link" th:href="@{/report}">
          <i class="fas fa-chart-area"></i>
          Report
+         <span class="sr-only">(current)</span>
          </a>
         </li>
         
@@ -99,74 +91,14 @@
        
         </div>
         </nav>
-        
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-           <h1 class="h2">Dashboard</h1>
-          </div>
-          <div class="container">
-           <div class="d-flex justify-content-center row mt-5">
-           <div class="col-10">
-           
-           <canvas id="chart-values-formatting-example"></canvas>
-           </div>
-           
-           
-           
-           </div>
-          
-          </div>
-          
-        
-        
-        </main>
-        
-        
-      </div>
-    </div>
-      
+        </div>
+        </div>
     
-   
+     <div class="container-fluid">
+      <h4 class="text-center">Reports</h4>
+     
+     
+     </div>
     
-    </body>
     
-    <script type="text/javascript">
- 
- const dataChartValuesFormattingExample = {
-		  type: 'bar',
-		  data: {
-		    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
-		    datasets: [
-		      {
-		        label: 'Sales',
-		        data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
-		      },
-		    ],
-		  },
-		};
-
-		// Options
-		const optionsChartValuesFormattingExample = {
-		  options: {
-		    scales: {
-		      yAxes: [
-		        {
-		          ticks: {
-		            callback: function (value, index, values) {
-		              return '$' + value;
-		            },
-		          },
-		        },
-		      ],
-		    },
-		  },
-		};
-
-		new mdb.Chart(
-		  document.getElementById('chart-values-formatting-example'),
-		  dataChartValuesFormattingExample,
-		  optionsChartValuesFormattingExample
-		);
- 
- </script>
-    </html>
+       

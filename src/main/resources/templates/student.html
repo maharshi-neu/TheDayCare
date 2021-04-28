@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://codepen.io/skjha5993/pen/bXqWpR.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  
+  <style>
+  .page-top{
+  background:linear-gradient(to bottom right, #ccffff -21%, #ffffff 79%);
+  }
+  .navbar{
+  background: linear-gradient(to right, #33cccc 0%, #ffccff 100%);
+  }
+  .nav-sidebar{
+  
+  }
+  .sidebar-sticky{
+   background:linear-gradient(to right, #ffffff 0%, #ffffcc 100%);
+  }
+  .nav.nav-link{
+  color: white;
+  }
+  
+  tr:hover {background-color:#ffccff;}
+  
+  .h{
+  text:center;
+  }
+ 
+  
+ </style>  
+ 
+ 
+    
+    
+    <title>Student Screen</title>
+    
+    <body class="page-top">
+    
+    <nav class="navbar sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/dashboard}">SystemAdmin</a>
+         <ul class="navbar-nav px-3">
+           <li class="nav-item text-nowrap">
+           <a class="nav-link" th:href="@{/welcome}" >Sign Out</a>
+           </li>
+         </ul>
+    </nav>
+    
+    <div class="container-fluid">
+    
+        <div class="row">
+        
+        <!-- sidenav bar -->
+       
+       <nav class=" nav-sidebar col-md-2 d-none d-md-block bg-light sidebar">
+           <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                  <a class="nav-link" th:href="@{/dashboard}">
+                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  Dashboard
+                  </a>
+                  </li>
+               </ul>
+        
+               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                   <span>Facilities</span>
+               </h6>
+        
+               <ul class="nav flex-column mb-2">
+                  <li class="nav-item">
+                  <a class="nav-link" th:href="@{/students}">
+                  <i class="fas fa-child"></i>
+                   Students
+                  <span class="sr-only">(current)</span>
+                  </a>
+                  </li>
+
+				  <li class="nav-item">
+				  <a class="nav-link"th:href="@{/teachers}"> <i class="fas fa-chalkboard-teacher"></i>
+				  Teachers
+				  </a></li>
+
+				  <li class="nav-item">
+                  <a class="nav-link" th:href="@{/classroom}">
+                  <i class="fas fa-chair"></i>
+                  Classroom
+                  </a>
+                  </li>
+                  </ul>
+        
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+               <span>Reports</span>
+              </h6>
+               <ul class="nav flex-column mb-2">
+        
+                <li class="nav-item">
+                <a class="nav-link" th:href="@{/report}">
+                <i class="fas fa-chart-area"></i>
+                 Report
+                </a>
+                </li>
+        
+               </ul>
+       
+        </div>
+        </nav>
+      
+      
+    
+    
+     
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 mx-auto px-auto">
+        
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+           <h1 class="h2">Students</h1>
+          </div>
+     
+         <!-- table  -->
+     
+         <div class="container">
+           <div class="d-flex justify-content-left row mt-2">
+           <div class="col-10">
+         <div class="h">
+         <h6>Students Roaster</h6>
+          <small class="text-muted">The following displays the list of students enrolled in the daycare</small>
+         </div>
+  <!-- <table class="table">  --> 
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+  
+  <!--<table class="table table-bordered">  -->   <!-- to make table border -->
+  <!--<table class="table table-striped">  --><!-- to make table zebra stripped -->
+   <!--  <table class="table table-dark"> --> <!-- to make entire table black-->
+    <thead class="thead-dark">
+      <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Birthday</th>
+      <th scope="col">Father's Name</th>
+      <th scope="col">Mother's Name</th>
+      <th scope="col">Date of Admission</th>
+      
+     </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>14 Jan 2020</td>
+      <td>Randy Sloan</td>
+      <td>Amanda Sloan</td>
+      <td>14 Jan 2020</td>
+      </tr>
+      <tr>
+      <th scope="row">2</th>
+      <td>Tony</td>
+      <td>Otto</td>
+      <td>14 Jan 2020</td>
+      <td>Mark sloan</td>
+      <td>sandy sloan</td>
+      <td>14 Feb 2020</td>
+      </tr>
+      <tr>
+      <th scope="row">3</th>
+      <td>Merdith</td>
+      <td>Grey</td>
+      <td>@mdo</td>
+      <td>Class A</td>
+      <td>11 Jan 2020</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  
+  
+  
+  <!-- vaccination tracker -->
+  
+   
+  <div class="h">
+         <h6>Vaccination Tracker</h6>
+          <small class="text-muted">The following displays the list of vaccines and their dosages for age group</small>
+         </div>
+  <div class="table2-responsive">
+    <table class="table table-hover table-striped">
+  
+  <!--<table class="table table-bordered">  -->   <!-- to make table border -->
+  <!--<table class="table table-striped">  --><!-- to make table zebra stripped -->
+   <!--  <table class="table table-dark"> --> <!-- to make entire table black-->
+    <thead class="thead-dark">
+      <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vaccination</th>
+      <th scope="col">Dosage</th>
+      <th scope="col">Date</th>
+      <th scope="col">Date</th>
+      <th scope="col">Date</th>
+      <th scope="col">Date</th>
+      <th scope="col">AgeGroup</th>
+      
+     </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <th scope="row">1</th>
+      <td>1-4</td>
+      <td>14-11-2020</td>
+      <td>11-12-2005</td>
+      <td>-</td>
+      <td>-</td>
+      <td>less 2</td>
+      </tr>
+      <tr>
+      <th scope="row">2</th>
+      <td>DTaP</td>
+      <td>4</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>less 2</td>
+      </tr>
+      <tr>
+      <th scope="row">3</th>
+      <td>Polio</td>
+      <td>3</td>
+      <td>-</td>
+      <td>-</td>
+      <td>less than 2</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  </main>
+  </div>
+  
+</div>
+     
+    
+    
+       
