@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,12 +27,18 @@ public class Student extends Person {
 
 	private LocalDate dob;
 	private LocalDate programStartDate;
+	private Integer grade;
 
 	@Transient
 	private Integer age;
 	
 	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
 	private Collection<Guardian> guardians;
+	
+    @ManyToOne(cascade = CascadeType.ALL)
+	private Classroom classroom;
+    
+	private LocalDate registrationDate;
 	
 	public Student() {
 		super();
@@ -42,12 +50,16 @@ public class Student extends Person {
 			String lastName,
 			Gender gender,
 			LocalDate dob,
-			LocalDate programStartDate) {
+			LocalDate programStartDate,
+			Integer grade,
+			LocalDate registrationDate) {
 		super(firstName, lastName, gender);
 
 		this.setId(id);
 		this.setDob(dob);;
 		this.setProgramStartDate(programStartDate);
+		this.setGrade(grade);
+		this.setRegistrationDate(registrationDate);
 	}
 	
 	@Override
@@ -59,6 +71,22 @@ public class Student extends Person {
 	
 	public Integer getAge() {
 		return Period.between(this.dob, LocalDate.now()).getYears();
+	}
+
+	public Integer getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Integer grade) {
+		this.grade = grade;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
 	}
 
 	public Long getId() {
