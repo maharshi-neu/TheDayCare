@@ -44,7 +44,6 @@ public class Student extends Person {
     
 	private LocalDate registrationDate;
 	
-	
 	public String fullName() {
 		return this.getFirstName() + " " + this.getLastName();
 	}
@@ -79,7 +78,7 @@ public class Student extends Person {
 	}
 	
 	public Integer getAge() {
-		return Period.between(this.dob, LocalDate.now()).getYears();
+		return Period.between(this.dob, LocalDate.now()).getMonths();
 	}
 
 	public Integer getGrade() {
@@ -119,6 +118,14 @@ public class Student extends Person {
 	
 	public Classroom getClassroom() {
 		return this.classroom;
+	}
+	
+	public List<Guardian> getGuardians() {
+		return this.guardians;
+	}
+	
+	public Guardian getPrimaryGuardian() {
+		return this.guardians.stream().filter(g -> g.getIsPrimary()).findFirst().get();
 	}
 	
 }

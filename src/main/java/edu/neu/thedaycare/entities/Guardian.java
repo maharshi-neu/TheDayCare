@@ -120,5 +120,9 @@ public class Guardian extends Person {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	
+	public String getFullName() {
+		return this.getFirstName() + " " + this.getLastName();
+	}
 
 }

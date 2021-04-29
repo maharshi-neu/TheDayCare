@@ -1,67 +1,112 @@
 package edu.neu.thedaycare.entities;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.Scheduled;
+
+import edu.neu.thedaycare.EmailService;
+import edu.neu.thedaycare.repository.ImmunizarionRequirementsRepository;
+import edu.neu.thedaycare.repository.ImmunizationRecordsRepository;
+import edu.neu.thedaycare.repository.StudentRepository;
+
+@SpringBootApplication
 public class Notification {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Autowired
+	@Resource
+	StudentRepository stur;
+
+	@Autowired
+	@Resource
+	ImmunizarionRequirementsRepository immurq;
+
+	@Autowired
+	@Resource
+	ImmunizationRecordsRepository immurec;
+
+//	@Scheduled(cron = "* * * * *")
+	@Scheduled(initialDelay = 1000L, fixedRate = 60000L)
+	public void annualRegistration() throws InterruptedException {
+		List<Student> ss = stur.findAll();
+		
+		LocalDate today = LocalDate.now();
+    	String from = "The Day Care <notifications@thedaycare.com>";
+		EmailService es = new EmailService();
+		
+		for (Student s: ss) {
+			Integer days = Period.between(s.getRegistrationDate(), today).getDays();
+			if (days <= 10) {
+				Guardian g = s.getPrimaryGuardian();
+				
+				String to = g.getEmail();
+				String subject = "Annual Registration!";
+				String body = "Hello "
+						+ g.getFullName() + ",\n"
+						+ g.getRelationship() + " of " + s.fullName() + ", please note that your annual "
+								+ "registration is due as of " + s.getRegistrationDate();
+						
+				es.sendSimpleMessage(to, from, subject, body);
+				Thread.sleep(3000L);
+			}
+		}
+		
+	}
 	
-	private String message;
-	private String sendTo; // email
-	private LocalDate whenDate;
-	private Boolean sent;
 	
-	@Override
-	public String toString() {
-		return "Notification [getId()=" + getId() + ", getMessage()=" + getMessage() + ", getSendTo()=" + getSendTo()
-				+ ", getWhen()=" + getWhenDate() + ", getSent()=" + getSent() + "]";
-	}
+	@Scheduled(fixedRate = 60000L)
+	public void immunizationAniversary() throws InterruptedException {
+		int preschoolAge = 2 * 12;
 
-	public Notification () {}
+		List<Student> ss = stur.findAll();
 
-	public Notification(Long id, String message, String sendTo, LocalDate when, Boolean sent) {
-		super();
-		this.id = id;
-		this.message = message;
-		this.sendTo = sendTo;
-		this.whenDate = when;
-		this.sent = sent;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public String getSendTo() {
-		return sendTo;
-	}
-	public void setSendTo(String sendTo) {
-		this.sendTo = sendTo;
-	}
-	public LocalDate getWhenDate() {
-		return whenDate;
-	}
-	public void setWhenDate(LocalDate when) {
-		this.whenDate = when;
-	}
-	public Boolean getSent() {
-		return sent;
-	}
-	public void setSent(Boolean sent) {
-		this.sent = sent;
-	}
+		List<ImmunizationRequirements> immupre = immurq.findByLevel("preschool");
+		List<ImmunizationRequirements> immukin = immurq.findByLevel("kindergarten");
+		
+		LocalDate today = LocalDate.now();
+    	String from = "The Day Care <notifications@thedaycare.com>";
+		EmailService es = new EmailService();
+    	
+    	for (Student s : ss) {
+			Guardian g = s.getPrimaryGuardian();
 
+			List<ImmunizationRecords> simm = immurec.findAllByStudentId(s.getId());
+			if (simm.size() == 0) {
+				String to = g.getEmail();
+				String subject = "All Immunization records missing";
+				String body = "Hello "
+						+ g.getFullName() + ",\n"
+						+ g.getRelationship() + " of " + s.fullName() + ", please note that your all of you "
+								+ "childs immunization records are missing. Please provide them.";
+						
+				es.sendSimpleMessage(to, from, subject, body);
+				Thread.sleep(3000L);
+				continue;
+			}
+    		if (s.getAge() <= preschoolAge) {
+    			for (ImmunizationRequirements imm : immupre) {
+    				List<ImmunizationRecords> thisimm = immurec.findAllByImmunizationRequirementsId(imm.getId());
+    				if (thisimm.size() == 0 || thisimm.size() < imm.getDoses()) {
+						String to = g.getEmail();
+						String subject = imm.getName() + " Immunization records missing";
+						String body = "Hello "
+								+ g.getFullName() + ",\n"
+								+ g.getRelationship() + " of " + s.fullName() + ", please note that " + imm.getDoses() 
+								+ " are required and " + thisimm.size()
+								+ " are provided, please take the remaning doses.";
+								
+						es.sendSimpleMessage(to, from, subject, body);
+						Thread.sleep(3000L);
+						continue;
+    				}
+    			}
+    		}
+    		
+    	}
+	}
 }
