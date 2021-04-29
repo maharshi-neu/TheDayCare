@@ -14,13 +14,13 @@ public class Notification {
 	
 	private String message;
 	private String sendTo; // email
-	private LocalDate when;
+	private LocalDate whenDate;
 	private Boolean sent;
 	
 	@Override
 	public String toString() {
 		return "Notification [getId()=" + getId() + ", getMessage()=" + getMessage() + ", getSendTo()=" + getSendTo()
-				+ ", getWhen()=" + getWhen() + ", getSent()=" + getSent() + "]";
+				+ ", getWhen()=" + getWhenDate() + ", getSent()=" + getSent() + "]";
 	}
 
 	public Notification () {}
@@ -30,7 +30,7 @@ public class Notification {
 		this.id = id;
 		this.message = message;
 		this.sendTo = sendTo;
-		this.when = when;
+		this.whenDate = when;
 		this.sent = sent;
 	}
 	public Long getId() {
@@ -51,11 +51,11 @@ public class Notification {
 	public void setSendTo(String sendTo) {
 		this.sendTo = sendTo;
 	}
-	public LocalDate getWhen() {
-		return when;
+	public LocalDate getWhenDate() {
+		return whenDate;
 	}
-	public void setWhen(LocalDate when) {
-		this.when = when;
+	public void setWhenDate(LocalDate when) {
+		this.whenDate = when;
 	}
 	public Boolean getSent() {
 		return sent;

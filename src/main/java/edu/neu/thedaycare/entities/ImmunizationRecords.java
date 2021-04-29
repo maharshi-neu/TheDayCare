@@ -25,12 +25,12 @@ public class ImmunizationRecords {
     @ManyToOne(cascade = CascadeType.ALL)
     private ImmunizationRequirements immunizationRequirements;
     
-    private LocalDate when;
+    private LocalDate whenDate;
 
 	@Override
 	public String toString() {
 		return "ImmunizationRecords [getId()=" + getId() + ", getStudent()=" + getStudent()
-				+ ", getImmunizationRequirements()=" + getImmunizationRequirements() + ", getWhen()=" + getWhen() + "]";
+				+ ", getImmunizationRequirements()=" + getImmunizationRequirements() + ", getWhen()=" + getWhenDate() + "]";
 	}
 
 	public ImmunizationRecords() {}
@@ -41,7 +41,7 @@ public class ImmunizationRecords {
 		this.setId(id);
 		this.setStudent(student);
 		this.setImmunizationRequirements(immunizationRequirements);
-		this.setWhen(when);
+		this.setWhenDate(when);
 	}
 
 	public Long getId() {
@@ -68,12 +68,12 @@ public class ImmunizationRecords {
 		this.immunizationRequirements = immunizationRequirements;
 	}
 
-	public LocalDate getWhen() {
-		return when;
+	public LocalDate getWhenDate() {
+		return whenDate;
 	}
 
-	public void setWhen(LocalDate when) {
-		this.when = when;
+	public void setWhenDate(LocalDate when) {
+		this.whenDate = when;
 	}
     
 	
