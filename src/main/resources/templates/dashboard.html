@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+</head>
 <body>
 	<h1>Welcome Admin</h1>
 
@@ -10,5 +14,28 @@
 	<form th:action="@{/testemail}" method="post">
 		<input type="submit" value="Test Email" />
 	</form>
+
+	<table id="maintable" class="display" style="width:100%">
+		<thead>
+			<tr>
+				<th> Student Name </th>
+				<th> Student Age </th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr th:if="${students.empty}">
+				<td colspan="2"> No Available </td>
+			</tr>
+			<tr th:each="student : ${students}">
+				<td><span th:text="${student.fullName}"></span></td>
+				<td><span th:text="${student.age}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+<script>
+$(document).ready(function() {
+    $('#maintable').DataTable();
+} );
+</script>
 </body>
 </html>

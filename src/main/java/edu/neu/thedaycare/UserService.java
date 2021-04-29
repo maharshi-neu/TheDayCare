@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import edu.neu.thedaycare.entities.Users;
+import edu.neu.thedaycare.repository.UserRepository;
 import edu.neu.thedaycare.entities.UserDetailsSecurity;
-import edu.neu.thedaycare.entities.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService {

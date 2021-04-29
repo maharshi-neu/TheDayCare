@@ -1,9 +1,10 @@
 package edu.neu.thedaycare.entities;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,33 +20,33 @@ public class Classroom {
 	private Long id;
 	
 	private Integer strength;
-	private String groupName;
+	private String className;
 	private Integer groupSize;
 	private Integer maxGroups;
 
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-	private Collection<Student> students;
+	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Student> students;
 	
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-	private Collection<Teacher> teachers;
+	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Teacher> teachers;
 	
 	public Classroom() {}
 	
-	public Classroom(Long id, Integer strength, String groupName, Integer groupSize, Integer maxGroups,
-			Collection<Student> students, Collection<Teacher> teachers) {
+	public Classroom(Long id, String className, Integer strength, Integer groupSize, Integer maxGroups,
+			List<Student> students, List<Teacher> teachers) {
 		this.setId(id);
 		this.setStrength(strength);
-		this.setGroupName(groupName);
 		this.setGroupSize(groupSize);
 		this.setMaxGroups(maxGroups);
 		this.setStudents(students);
 		this.setTeachers(teachers);
+		this.setClassName(className);
 	}
 
 	@Override
 	public String toString() {
 		return "Classroom [getId()=" + getId() + ", getStrength()=" + getStrength() + ", getGroupName()="
-				+ getGroupName() + ", getGroupSize()=" + getGroupSize() + ", getMaxGroups()=" + getMaxGroups()
+				+ ", getGroupSize()=" + getGroupSize() + ", getMaxGroups()=" + getMaxGroups()
 				+ ", getStudents()=" + getStudents() + ", getTeachers()=" + getTeachers() + "]";
 	}
 
@@ -65,14 +66,6 @@ public class Classroom {
 		this.strength = strength;
 	}
 
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
 	public Integer getGroupSize() {
 		return groupSize;
 	}
@@ -89,21 +82,28 @@ public class Classroom {
 		this.maxGroups = maxGroups;
 	}
 
-	public Collection<Student> getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(Collection<Student> students) {
+	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
 
-	public Collection<Teacher> getTeachers() {
+	public List<Teacher> getTeachers() {
 		return teachers;
 	}
 
-	public void setTeachers(Collection<Teacher> teachers) {
+	public void setTeachers(List<Teacher> teachers) {
 		this.teachers = teachers;
 	}
-	
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
 	
 }

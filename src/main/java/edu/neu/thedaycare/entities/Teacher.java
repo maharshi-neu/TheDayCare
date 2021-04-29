@@ -1,10 +1,10 @@
 package edu.neu.thedaycare.entities;
 
 import java.time.LocalDate;
-import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +22,7 @@ public class Teacher extends Person {
 	private Double salary;
 	private LocalDate doj;
 	
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Classroom classrooms;
     
 	public Teacher() {}

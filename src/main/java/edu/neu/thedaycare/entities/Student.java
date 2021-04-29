@@ -2,10 +2,11 @@ package edu.neu.thedaycare.entities;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,17 +29,25 @@ public class Student extends Person {
 	private LocalDate dob;
 	private LocalDate programStartDate;
 	private Integer grade;
-
+	
 	@Transient
 	private Integer age;
 	
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-	private Collection<Guardian> guardians;
+	@Transient
+	private String fullName;
 	
-    @ManyToOne(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Guardian> guardians;
+	
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Classroom classroom;
     
 	private LocalDate registrationDate;
+	
+	
+	public String fullName() {
+		return this.getFirstName() + " " + this.getLastName();
+	}
 	
 	public Student() {
 		super();
@@ -106,6 +115,10 @@ public class Student extends Person {
 	}
 	public void setProgramStartDate(LocalDate programStartDate) {
 		this.programStartDate = programStartDate;
+	}
+	
+	public Classroom getClassroom() {
+		return this.classroom;
 	}
 	
 }
