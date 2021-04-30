@@ -16,6 +16,14 @@
 	crossorigin="anonymous">
 
 <style>
+.page-top {
+	background: linear-gradient(to bottom right, #ccffff -21%, #ffffff 79%);
+}
+
+.body {
+	background: linear-gradient(to bottom left, #ffffcc 0%, #ff66ff 100%);
+}
+
 .navbar {
 	background: linear-gradient(to right, #33cccc 0%, #ffccff 100%);
 }
@@ -27,20 +35,13 @@
 .nav.nav-link {
 	color: white;
 }
-
-.nav-link a:hover {
-	color: #00ccff;
-}
 </style>
 
 
 
 
-<title>Dashboard</title>
-
-
-<body id="page-top">
-	<!-- navigar bar for dashboard -->
+<title>Teacher Screen</title>
+<body class="page-top">
 
 	<nav class="navbar sticky-top bg-dark flex-md-nowrap p-0">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" th:href="@{/dashboard}">SystemAdmin</a>
@@ -50,7 +51,6 @@
 		</ul>
 	</nav>
 
-	<!-- sidenav design -->
 	<div class="container-fluid">
 		<div class="row">
 
@@ -60,8 +60,8 @@
 					<ul class="nav flex-column">
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/dashboard}"> <i
-								class="fas fa-fw fa-tachometer-alt"></i> Dashboard <span
-								class="sr-only">(current)</span>
+								class="fas fa-fw fa-tachometer-alt"></i> Dashboard
+
 						</a></li>
 					</ul>
 
@@ -73,11 +73,12 @@
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/students}"> <i class="fas fa-child"></i> Students
+
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/teachers}"> <i class="fas fa-chalkboard-teacher"></i>
-								Teachers
+								Teachers <span class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
@@ -101,77 +102,96 @@
 				</div>
 			</nav>
 
-			<!-- main body of dashboard -->
+			<main role="main"
+				class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 mx-auto px-auto">
 
-			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 				<div
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-					<h1 class="h2">Dashboard</h1>
+					<h1 class="h2">Teachers</h1>
 				</div>
-				<div class="container">
-					<div class="d-flex justify-content-center row mt-5">
-						<div class="col-10">
 
-							<canvas id="chart-values-formatting-example"></canvas>
+				<!-- table  -->
+
+				<div class="container">
+					<div class="d-flex justify-content-left row mt-2">
+						<div class="col-10">
+							<div class="h">
+								<h6>Teachers List</h6>
+								<small class="text-muted">The following displays the
+									list of teachers in the daycare</small>
+							</div>
+							<!-- <table class="table">  -->
+							<div class="table-responsive">
+								<table class="table table-hover table-striped">
+
+									<!--<table class="table table-bordered">  -->
+									<!-- to make table border -->
+									<!--<table class="table table-striped">  -->
+									<!-- to make table zebra stripped -->
+									<!--  <table class="table table-dark"> -->
+									<!-- to make entire table black-->
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">First</th>
+											<th scope="col">Last</th>
+											<th scope="col">Email</th>
+											<th scope="col">Contact No</th>
+											<th scope="col">Start Date</th>
+
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">1</th>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>m@gmail.com</td>
+											<td>+1667677</td>
+											<td>14-11-1886</td>
+
+										</tr>
+										<tr>
+											<th scope="row">2</th>
+											<td>Tony</td>
+											<td>Otto</td>
+											<td>t@gmail.com</td>
+											<td>+1667677</td>
+											<td>14 Feb 2020</td>
+										</tr>
+										<tr>
+											<th scope="row">3</th>
+											<td>Merdith</td>
+											<td>Grey</td>
+											<td>@mdo</td>
+											<td>+55666</td>
+											<td>11 Jan 2020</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
 						</div>
+
+
 
 
 
 					</div>
 
 				</div>
-
-
-
 			</main>
-
-
 		</div>
 	</div>
 
 
 
 
+
 </body>
+</html>
 
-<script type="text/javascript">
- 
- const dataChartValuesFormattingExample = {
-		  type: 'bar',
-		  data: {
-		    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
-		    datasets: [
-		      {
-		        label: 'Sales',
-		        data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
-		      },
-		    ],
-		  },
-		};
 
-		// Options
-		const optionsChartValuesFormattingExample = {
-		  options: {
-		    scales: {
-		      yAxes: [
-		        {
-		          ticks: {
-		            callback: function (value, index, values) {
-		              return '$' + value;
-		            },
-		          },
-		        },
-		      ],
-		    },
-		  },
-		};
 
-		new mdb.Chart(
-		  document.getElementById('chart-values-formatting-example'),
-		  dataChartValuesFormattingExample,
-		  optionsChartValuesFormattingExample
-		);
- 
- </script>
-    </html>
 
