@@ -1,11 +1,10 @@
 package edu.neu.thedaycare;
 
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
@@ -18,8 +17,6 @@ public class MainController {
 	@RequestMapping(value="/enquiry", method=RequestMethod.GET)
 	public String enquiry(Model model) {
 		
-		System.out.println("welcome->enquiry()");
-		
 		return "enquiry";
 		
 	}
@@ -30,7 +27,7 @@ public class MainController {
     }
 
 
-	@RequestMapping(value="dashboard/students", method=RequestMethod.GET)
+	@RequestMapping(value="/students", method=RequestMethod.GET)
 	public String student(Model model) {
 		
 		System.out.println("welcome->dashstudent()");
@@ -39,16 +36,14 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value="dashboard/teachers", method=RequestMethod.GET)
+	@RequestMapping(value="/teachers", method=RequestMethod.GET)
 	public String teacher(Model model) {
-		
-		System.out.println("welcome->dashteacher()");
 		
 		return "teacher";
 		
 	}
 	
-	@RequestMapping(value="dashboard/classroom", method=RequestMethod.GET)
+	@RequestMapping(value="/classroom", method=RequestMethod.GET)
 	public String classroom(Model model) {
 		
 		System.out.println("welcome->dashclassroom()");
@@ -57,8 +52,9 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value="dashboard/report", method=RequestMethod.GET)
+	@RequestMapping(value="/report", method=RequestMethod.GET)
 	public String report(Model model) {
+	
 		
 		System.out.println("welcome->dashreport()");
 		
