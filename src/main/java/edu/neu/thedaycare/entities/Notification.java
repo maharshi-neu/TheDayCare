@@ -2,6 +2,7 @@ package edu.neu.thedaycare.entities;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -91,7 +92,7 @@ public class Notification {
     		if (s.getAge() <= preschoolAge) {
     			for (ImmunizationRequirements imm : immupre) {
     				List<ImmunizationRecords> thisimm = immurec.findAllByImmunizationRequirementsId(imm.getId());
-    				if (thisimm.size() == 0 || thisimm.size() < imm.getDoses()) {
+    				if (thisimm.size() == 0) {
 						String to = g.getEmail();
 						String subject = imm.getName() + " Immunization records missing";
 						String body = "Hello "
@@ -103,6 +104,30 @@ public class Notification {
 						es.sendSimpleMessage(to, from, subject, body);
 						Thread.sleep(3000L);
 						continue;
+    				} else if(thisimm.size() < imm.getDoses()) {
+    					LocalDate lastDoseTakenDate = thisimm
+    							.stream()
+    							.map(o -> o.getWhenDate())
+    							.max(LocalDate::compareTo).get();
+    					int diffMon = Period.between(lastDoseTakenDate, LocalDate.now()).getMonths();
+    					
+    					if (diffMon > imm.getMonthsApart()) {
+							String to = g.getEmail();
+							String subject = imm.getName() + " Immunization records missing";
+							String body = "Hello "
+									+ g.getFullName() + ",\n"
+									+ g.getRelationship() + " of " + s.fullName()
+									+ ", please note that " + imm.getDoses() + " are required."
+									+ " Its been " + diffMon + " months since your last dose of "
+									+ imm.getName()
+									+ " , please take the remaning doses.";
+									
+							es.sendSimpleMessage(to, from, subject, body);
+							Thread.sleep(3000L);
+							continue;
+    						
+    					}
+    					
     				}
     			}
     		}
