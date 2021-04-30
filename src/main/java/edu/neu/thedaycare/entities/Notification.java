@@ -16,7 +16,7 @@ import edu.neu.thedaycare.repository.ImmunizarionRequirementsRepository;
 import edu.neu.thedaycare.repository.ImmunizationRecordsRepository;
 import edu.neu.thedaycare.repository.StudentRepository;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class Notification {
 	
 	@Autowired

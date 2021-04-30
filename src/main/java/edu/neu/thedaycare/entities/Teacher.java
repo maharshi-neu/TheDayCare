@@ -71,5 +71,9 @@ public class Teacher extends Person {
 	public void setClassrooms(Classroom classrooms) {
 		this.classrooms = classrooms;
 	}
+	
+	public String getFullName() {
+		return this.getFirstName() + " " + this.getLastName();
+	}
 
 }

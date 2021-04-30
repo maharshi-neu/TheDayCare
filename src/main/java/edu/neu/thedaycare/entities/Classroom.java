@@ -4,12 +4,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.Query;
+
+import edu.neu.thedaycare.repository.StudentRepository;
 
 @Entity
 @Table
@@ -104,6 +112,17 @@ public class Classroom {
 
 	public void setClassName(String className) {
 		this.className = className;
+	}
+
+	public String getRatio() {
+		List<Teacher> t = this.getTeachers();
+		List<Student> s = this.getStudents();
+
+		Integer ratio = this.students.size() / this.teachers.size();
+
+		String r = "" + ratio + ":" + "1";
+		
+		return r;
 	}
 	
 }
